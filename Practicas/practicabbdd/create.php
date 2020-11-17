@@ -28,7 +28,7 @@
 
             try {
                 $query = "INSERT INTO products SET name = :name, description=:description, price=:price, created=:created";
-                $preparedQuery = $pdo->prepare($query);
+                $statement = $pdo->prepare($query);
                 //con htmlsp y strip_tags hago el control de lo que recibo
                 if (isset($name)) {
                     $name = htmlspecialchars(strip_tags($_POST['name']));
@@ -40,14 +40,14 @@
                     $price = htmlspecialchars(strip_tags($_POST['price']));
                 }
                 //y los bindeo:
-                $preparedQuery->bindParam(':name', $name);
-                $preparedQuery->bindParam(':description', $description);
-                $preparedQuery->bindParam(':price', $price);
+                $statement->bindParam(':name', $name);
+                $statement->bindParam(':description', $description);
+                $statement->bindParam(':price', $price);
                 //genero la fecha de creación:
                 $created = date('Y-m-d H:i:s');
-                $preparedQuery->bindParam(':created', $created);
+                $statement->bindParam(':created', $created);
                 //ejecuto la query:
-                if ($preparedQuery->execute()) {
+                if ($statement->execute()) {
                     echo "<div class='alert alert-success'>Creado.</div>";
                 } else {
                     echo "<div class='alert alert-danger'>No creado.</div>";            //OJO esto me sale tb al principio porq no hay nada

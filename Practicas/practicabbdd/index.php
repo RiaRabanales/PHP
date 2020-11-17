@@ -26,17 +26,82 @@
                 <h1>Ver productos</h1>
             </div>
 
-            <!-- PHP code to read records will be here -->
+            <?php
+            include '../config/database.php';
 
-        </div> <!-- end .container -->
+            //Aquí el prompt de confirmación de borrado, redirigido de delete.php
+            $action = isset($_GET['action']) ? $_GET['action'] : "";
+            if ($action == 'deleted') {
+                echo "<div class='alert alert-success'>Producto eliminado.</div>";
+            }
+
+            //selecciono todos los datos:
+            $query = "SELECT id, name, description, price FROM products ORDER BY id ASC";
+            $statement = $pdo->prepare($query);
+            $statement->execute();
+
+            // calculo el número de filas que retorna
+            $num = $statement->rowCount();
+
+            // genero el link para crear nuevos productos
+            echo "<a href='create.php' class='btn btn-primary m-b-1em'>Crear nuevo producto</a>";
+
+            //si encuentra al menos un producto, me incluye los datos en la tabla que genero; sino me salta un aviso.
+            if ($num > 0) {
+
+                echo "<table class='table table-hover table-responsive table-bordered'>";       //creo la tabla con sus cabeceras
+                echo "<tr>";
+                echo "<th>ID</th>";
+                echo "<th>Nombre</th>";
+                echo "<th>Descripción</th>";
+                echo "<th>Precio</th>";
+                echo "<th>Acción</th>";
+                echo "</tr>";
+
+                // esto será el cuerpo de la tabla, con lo que recibo de mi consulta - uso fetch() porque es más rápido que fetchAll()
+                while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+                    // con 'extract row' convierto '$row['firstname']' en sólo '$firstname
+                    extract($row);
+
+                    // creo una nueva fila en la tabla para cada producto
+                    echo "<tr>";
+                    echo "<td>{$id}</td>";
+                    echo "<td>{$name}</td>";
+                    echo "<td>{$description}</td>";
+                    echo "<td>{$price}</td>";
+                    echo "<td>";
+                    // y genero los links de las acciones
+                    echo "<a href='read_one.php?id={$id}' class='btn btn-info m-r-1em'>ver</a>";
+                    echo "<a href='update.php?id={$id}' class='btn btn-primary m-r-1em'>editar</a>";
+                    echo "<a href='#' onclick='delete_user({$id});'  class='btn btn-danger'>borrar</a>";
+                    echo "</td>";
+                    echo "</tr>";
+                }
+                echo "</table>";        //termino la tabla
+            } else {
+                echo "<div class='alert alert-danger'>No se han encontrado productos.</div>";
+            }
+            ?>
+
+            <!-- javascript para confirmar cuando borro -->
+            <script type='text/javascript'>
+                function delete_user(id) {
+
+                    var answer = confirm('¿Estás seguro?');
+                    if (answer) {
+                        // si el usuario cloca ok, entonces llamo a delete.php con la id y ejecuto la query de delete
+                        window.location = 'delete.php?id=' + id;
+                    }
+                }
+            </script>
+
+        </div> 
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
         <!-- Latest compiled and minified Bootstrap JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-        <!-- confirm delete record will be here -->
 
     </body>
 </html>
