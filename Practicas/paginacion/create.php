@@ -23,7 +23,7 @@
             <?php
             if ($_POST) {
                 //incluyo el archivo de configuracion de la bbdd:
-                include '../config/database.php';
+                include '../config/database_pag.php';
 
                 //hago query: inserto, la preparo para ejecutar, veo valores de post, los bindeo, añado fecha, y ejecuto query
 
