@@ -19,7 +19,7 @@
     </head>
     <body>
 
-        <!-- Esta es la versión avanzada de practicabbdd: añade paginación y cambia código -->
+        <!-- Esta es la versión avanzada de CRUD: añade paginación y cambia código -->
         <div class="container">
 
             <div class="page-header">
@@ -27,7 +27,7 @@
             </div>
 
             <?php
-            include '../config/database_pag.php';
+            include 'config/database_pag.php';
 
             //Aquí el prompt de confirmación de borrado, redirigido de delete.php
             $action = isset($_GET['action']) ? $_GET['action'] : "";

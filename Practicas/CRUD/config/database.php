@@ -1,4 +1,6 @@
 <?php
+//Este es el archivo de conexión pre-paginación; lo guardo e incluyo para aclararme.
+
 //con esto conecto a mi base de datos
 $host = "localhost";
 $db_name = "php_beginner_crud_level_1";
