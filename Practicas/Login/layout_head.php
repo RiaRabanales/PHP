@@ -18,7 +18,7 @@
     </head>
     <body>
 
-        <!-- incluyo la navbar -->
+        <!-- incluyo la navbar antes de meter contenido de página -->
         <?php include_once 'navigation.php'; ?>
 
         <!-- container -->

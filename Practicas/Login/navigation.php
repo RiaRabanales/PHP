@@ -26,7 +26,7 @@
 
             <?php
             // veo si el usuario estaba logeado; si sí, enseño opciones de editar perfil, pedidos y logout
-            if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['nivel_acceso'] == 'Customer') {
+            if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true && $_SESSION['access_level'] == 'Customer') {
                 ?>
                 <ul class="nav navbar-nav navbar-right">
                     <li <?php echo $page_title == "Edit Profile" ? "class='active'" : ""; ?>>

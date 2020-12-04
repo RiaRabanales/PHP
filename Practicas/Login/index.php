@@ -1,6 +1,7 @@
 <?php
 
 //Tutorial en: https://codeofaninja.com/2013/03/php-login-script.html
+// Voy por 8.1; revisado hasta 7.10
 // incluyo el core:
 include_once "admin/config/core.php";
 

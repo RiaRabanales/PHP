@@ -50,7 +50,6 @@ if ($_POST) {
         // pero si no coincide usuario-contraseña o el usuario no existe:
     } else {
         $access_denied = true;
-        echo "te vas fuera";
     }
 }
 
